@@ -1,4 +1,4 @@
-#include "../include/phonebook.hpp"
+#include "../include/PhoneBook.hpp"
 
 int	main(void) {
 	PhoneBook	*phonebook = new PhoneBook();
