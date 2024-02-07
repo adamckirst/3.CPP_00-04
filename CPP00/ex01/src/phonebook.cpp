@@ -1,40 +1,32 @@
 #include "../include/PhoneBook.hpp"
 Contact::Contact(std::string name, std::string last, std::string nick, std::string phone) : 
-    firstName(name), 
-    lastName(last), 
-    nickname(nick), 
-    phoneNumber(phone) {};
+    firstName_(name), 
+    lastName_(last), 
+    nickname_(nick), 
+    phoneNumber_(phone) {};
 
-int Contact::showSecret(std::string pw) const {
-    if (pw == this->pw)
-    {
-        std::cout << "\033[1m\033[31mDarkest Secret: \033[0m" << this->darkestSecret_ << std::endl;
-        return (0);
-    }
+std::string Contact::getSecret(std::string pw) const {
+    if (pw == this->pw_)
+        return this->darkestSecret_;
     else
-        return (1);
+        return ("Invalid password.");
 };
 
 Contact *PhoneBook::newContact() {
     std::string name, last, nick, phone, secret, pw;
 
     std::cout << "Enter first name: ";
-    while (!getline(std::cin, name))
-        std::cout << "Error" << std::endl;
+    getline(std::cin, name);
     std::cout << "Enter last name: ";
-    while (!getline(std::cin, last))
-        std::cout << "Error" << std::endl;
+    getline(std::cin, last);
     std::cout << "Enter nickname: ";
-    while (!getline(std::cin, nick))
-        std::cout << "Error" << std::endl;
+    getline(std::cin, nick);
     std::cout << "Enter phone number: ";
-    while (!getline(std::cin, phone))
-        std::cout << "Error" << std::endl;
+    getline(std::cin, phone);
     std::cout << "Enter darkest secret: ";
-    while (!getline(std::cin, secret))
-        std::cout << "Error" << std::endl;
+    getline(std::cin, secret);
     Contact *contact = new Contact(name, last, nick, phone);
-    contact->setSecret(secret, this->password);
+    contact->setSecret(secret, this->password_);
     std::cout << "Contact added" << std::endl;
     return contact;
 }
@@ -58,24 +50,29 @@ void    PhoneBook::fullPhonebook(int *oldest) {
 };
 void    PhoneBook::secret(Contact contact) const {
     std::string input;
-    std::cout << "\nDo you want to see the darkest secret? (yes/no)" << std::endl;
-    getline(std::cin, input);
-    if (input != "yes")
-        return;
-    std::cout << "Enter the password to see the secret or type RETURN" << std::endl;
+    std::string output;
+    
+    std::cout << "Enter the password to see the darkest secret or type RETURN" << std::endl;
     while (input != "RETURN")
     {
         getline(std::cin, input);
-        if (!contact.showSecret(input))
+        if (input == "RETURN")
             return;
-        std::cout << "Invalid password. Try again or type RETURN" << std::endl;
+        output = contact.getSecret(input);
+        if (output == "Invalid password.")
+        {
+            std::cout << output << " Try again or type RETURN" << std::endl;
+            continue;
+        }
+        std::cout << "\033[1m\033[31mDarkest Secret: \033[0m" << output << std::endl;
+        return;
     }
 }
 void    PhoneBook::printContact(Contact contact) const {
-    std::cout << "\n\033[1m\033[36mFirst Name: \033[0m" << contact.firstName << std::endl;
-    std::cout << "\033[1m\033[36mLast Name: \033[0m" << contact.lastName << std::endl;
-    std::cout << "\033[1m\033[36mNickname: \033[0m" << contact.nickname << std::endl;
-    std::cout << "\033[1m\033[36mPhone Number: \033[0m" << contact.phoneNumber << std::endl;
+    std::cout << "\n\033[1m\033[36mFirst Name: \033[0m" << contact.getFirstName() << std::endl;
+    std::cout << "\033[1m\033[36mLast Name: \033[0m" << contact.getLastName() << std::endl;
+    std::cout << "\033[1m\033[36mNickname: \033[0m" << contact.getNickname() << std::endl;
+    std::cout << "\033[1m\033[36mPhone Number: \033[0m" << contact.getPhoneNumber() << std::endl;
     this->secret(contact);
     std::cout << std::endl;
 }
@@ -90,21 +87,21 @@ void    PhoneBook::printList() const {
     this->printHeader();
     for (int i = 0; i < 8; i++)
     {
-        if (!contact_[i].firstName.empty())
+        if (!contact_[i].getFirstName().empty())
         {
             std::cout << std::setw(10) << i << "|";
-            if (contact_[i].firstName.length() > 10)
-                std::cout.write(contact_[i].firstName.c_str(), 9) << "." << "|";
+            if (contact_[i].getFirstName().length() > 10)
+                std::cout.write(contact_[i].getFirstName().c_str(), 9) << "." << "|";
             else
-                std::cout << std::setw(10) << contact_[i].firstName << "|";
-            if (contact_[i].lastName.length() > 10)
-                std::cout.write(contact_[i].lastName.c_str(), 9) << "." << "|";
+                std::cout << std::setw(10) << contact_[i].getFirstName() << "|";
+            if (contact_[i].getLastName().length() > 10)
+                std::cout.write(contact_[i].getLastName().c_str(), 9) << "." << "|";
             else
-                std::cout << std::setw(10) << contact_[i].lastName << "|";
-            if (contact_[i].nickname.length() > 10)
-                std::cout.write(contact_[i].nickname.c_str(), 9) << ".";
+                std::cout << std::setw(10) << contact_[i].getLastName() << "|";
+            if (contact_[i].getNickname().length() > 10)
+                std::cout.write(contact_[i].getNickname().c_str(), 9) << ".";
             else
-                std::cout << std::setw(10) << contact_[i].nickname;
+                std::cout << std::setw(10) << contact_[i].getNickname();
             std::cout << std::endl;
         }
     }
@@ -114,7 +111,7 @@ void    PhoneBook::add() {
 
     for (int i = 0; i < 8; i++)
     {
-        while (!this->contact_[i].firstName.empty())
+        while (!this->contact_[i].getFirstName().empty())
         {
             if (i++ == 7)
             {
@@ -130,7 +127,7 @@ void    PhoneBook::add() {
 void    PhoneBook::search() const {
     std::string input;
 
-    if (contact_[0].firstName.empty())
+    if (contact_[0].getFirstName().empty())
     {
         std::cout << "Phonebook is empty.\n" << std::endl;
         return;
@@ -138,7 +135,7 @@ void    PhoneBook::search() const {
     this->printList();
     std::cout << "Enter the index of the contact you want to see" << std::endl;
     getline(std::cin, input);
-    if (input.length() == 1 && input[0] >= '0' && input[0] <= '7' && !contact_[input[0] - '0'].firstName.empty())
+    if (input.length() == 1 && input[0] >= '0' && input[0] <= '7' && !contact_[input[0] - '0'].getFirstName().empty())
         this->printContact(contact_[input[0] - '0']);
     else
         std::cout << "Invalid input" << std::endl;
