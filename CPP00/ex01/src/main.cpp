@@ -22,5 +22,6 @@ int	main(void) {
 		else if (input == "EXIT")
 			break;
 	}
+	delete phonebook;
 	return 0;
 }

@@ -6,16 +6,16 @@
 #    By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/28 12:00:40 by achien-k          #+#    #+#              #
-#    Updated: 2024/02/09 11:47:20 by achien-k         ###   ########.fr        #
+#    Updated: 2024/02/09 12:59:37 by achien-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	PhoneBook
+NAME		=	ZombieHorde
 CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 INC_DIR		=	include
 SRC_DIR		=	src
-SRCS		=	PhoneBook main
+SRCS		=	Zombie zombieHorde main
 OBJ_DIR		=	bin
 OBJ			=	$(foreach src, $(SRCS), $(OBJ_DIR)/$(src).o)
 VPATH		=	$(SRC_DIR)
@@ -37,6 +37,7 @@ $(OBJ_DIR)/%.o:	%.cpp
 leaks:			$(NAME)
 				@echo "\033[36mCompiling with fsanitize...\033[0m"
 				@$(CXX) $(CXXFLAGS) -fsanitize=address -o $(NAME) $(OBJ) -I$(INC_DIR)
+				@echo "\033[1;32m\033[1m$(NAME) is ready to use!\033[0m"
 
 clean:
 				@echo "\033[33mCleaning file objects...\033[0m"
