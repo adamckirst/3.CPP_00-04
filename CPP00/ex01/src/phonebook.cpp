@@ -1,30 +1,46 @@
-#include "../include/PhoneBook.hpp"
-Contact::Contact(std::string name, std::string last, std::string nick, std::string phone) : 
-    firstName_(name), 
-    lastName_(last), 
-    nickname_(nick), 
-    phoneNumber_(phone) {};
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/20 18:06:47 by achien-k          #+#    #+#             */
+/*   Updated: 2024/08/20 19:13:13 by achien-k         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-std::string Contact::getSecret(std::string pw) const {
-    if (pw == this->pw_)
-        return this->darkestSecret_;
-    else
-        return ("Invalid password.");
-};
+#include "../include/PhoneBook.hpp"
 
 Contact *PhoneBook::newContact() {
     std::string name, last, nick, phone, secret, pw;
 
-    std::cout << "Enter first name: ";
-    getline(std::cin, name);
+    while (name == "") {
+        std::cout << "Enter first name: ";
+        getline(std::cin, name);
+        if (name == "")
+            std::cerr << "Error: First name cannot be empty. Please try again." << std::endl;
+    }
     std::cout << "Enter last name: ";
-    getline(std::cin, last);
+    while (getline(std::cin, last).empty()) {
+        std::cerr << "Error: Last name cannot be empty. Please try again." << std::endl;
+        std::cout << "Enter last name: ";
+    }
     std::cout << "Enter nickname: ";
-    getline(std::cin, nick);
+    while (getline(std::cin, nick).empty()) {
+        std::cerr << "Error: Nickname cannot be empty. Please try again." << std::endl;
+        std::cout << "Enter nickname: ";
+    }
     std::cout << "Enter phone number: ";
-    getline(std::cin, phone);
+    while (getline(std::cin, phone).empty()) {
+        std::cerr << "Error: Phone number cannot be empty. Please try again." << std::endl;
+        std::cout << "Enter phone number: ";
+    }
     std::cout << "Enter darkest secret: ";
-    getline(std::cin, secret);
+    while (getline(std::cin, secret).empty()) {
+        std::cerr << "Error: Darkest secret cannot be empty. Please try again." << std::endl;
+        std::cout << "Enter darkest secret: ";
+    }
     Contact *contact = new Contact(name, last, nick, phone);
     contact->setSecret(secret, this->password_);
     std::cout << "Contact added" << std::endl;
@@ -52,16 +68,20 @@ void    PhoneBook::secret(Contact contact) const {
     std::string input;
     std::string output;
     
-    std::cout << "Enter the password to see the darkest secret or type RETURN" << std::endl;
-    while (input != "RETURN")
+    if (this->password_ == "") {
+        std::cout << "\033[1m\033[31mDarkest Secret: \033[0m" << contact.getSecret("") << std::endl;
+        return; 
+    }
+    std::cout << "Enter the password to see the darkest secret or type BACK" << std::endl;
+    while (input != "BACK")
     {
         getline(std::cin, input);
-        if (input == "RETURN")
+        if (input == "BACK")
             return;
         output = contact.getSecret(input);
         if (output == "Invalid password.")
         {
-            std::cout << output << " Try again or type RETURN" << std::endl;
+            std::cout << output << " Try again or type BACK" << std::endl;
             continue;
         }
         std::cout << "\033[1m\033[31mDarkest Secret: \033[0m" << output << std::endl;
@@ -106,6 +126,14 @@ void    PhoneBook::printList() const {
         }
     }
 }
+bool    PhoneBook::setPassword(std::string pw) {
+    if (pw == "Invalid Password.") 
+        return false; 
+    else {
+        this->password_ = pw; 
+        return true;
+        }
+    };
 void    PhoneBook::add() {	
     static int oldest = 0;
 
@@ -137,6 +165,8 @@ void    PhoneBook::search() const {
     getline(std::cin, input);
     if (input.length() == 1 && input[0] >= '0' && input[0] <= '7' && !contact_[input[0] - '0'].getFirstName().empty())
         this->printContact(contact_[input[0] - '0']);
-    else
-        std::cout << "Invalid input" << std::endl;
+    else {
+        std::cout << "\033[1m\033[31mInvalid input. Try again.\033[0m" << std::endl << std::endl;
+        this->search();
+    }
 }

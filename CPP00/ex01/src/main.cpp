@@ -4,7 +4,7 @@ int	main(void) {
 	PhoneBook	*phonebook = new PhoneBook();
 	std::string	input;
 
-	std::cout << "Welcome to your new PhoneBook.\nTo start, set up a password: ";
+	std::cout << "Welcome to your new PhoneBook.\nTo start, set up a password for secrets or leave empty: ";
 	getline(std::cin, input);
 	while (!phonebook->setPassword(input))
 	{

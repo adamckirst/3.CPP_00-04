@@ -6,7 +6,7 @@
 #    By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/28 12:00:40 by achien-k          #+#    #+#              #
-#    Updated: 2024/02/09 11:47:20 by achien-k         ###   ########.fr        #
+#    Updated: 2024/08/20 18:13:01 by achien-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 INC_DIR		=	include
 SRC_DIR		=	src
-SRCS		=	PhoneBook main
+SRCS		=	PhoneBook Contact main
 OBJ_DIR		=	bin
 OBJ			=	$(foreach src, $(SRCS), $(OBJ_DIR)/$(src).o)
 VPATH		=	$(SRC_DIR)
