@@ -14,9 +14,11 @@ private:
     std::string phoneNumber_;
 
 public:
-
     Contact();
     Contact(std::string first, std::string last, std::string nick, std::string phone);
+    Contact(const Contact &other);
+    Contact &operator=(const Contact &other);
+    ~Contact();
 
     void setSecret(std::string secret, std::string pw);
 
