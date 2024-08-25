@@ -10,9 +10,9 @@ class PhoneBook
 private:
   Contact contact_[8];
   std::string password_;
+  int oldest_;
 
-  Contact *newContact();
-  void fullPhonebook(int *oldest);
+  Contact newContact();
   void printContact(Contact contact) const;
   void printHeader() const;
   void printList() const;

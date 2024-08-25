@@ -1,27 +1,40 @@
 #include "../include/PhoneBook.hpp"
+#include "../include/helpers.hpp"
 
-int	main(void) {
-	PhoneBook	*phonebook = new PhoneBook();
-	std::string	input;
+void ft_getline(std::string &input)
+{
+	getline(std::cin, input);
+	if (std::cin.eof())
+	{
+		std::cerr << std::endl
+				  << BOLD_TEXT << RED_TEXT << "ERROR: closed input stream." << std::endl;
+		exit(1);
+	}
+}
+
+int main(void)
+{
+	PhoneBook phonebook = PhoneBook();
+	std::string input;
 
 	std::cout << "Welcome to your new PhoneBook.\nTo start, set up a password for secrets or leave empty: ";
-	getline(std::cin, input);
-	while (!phonebook->setPassword(input))
+	ft_getline(input);
+	while (!phonebook.setPassword(input))
 	{
 		std::cout << "Invalid password. Please try again: ";
-		getline(std::cin, input);
+		ft_getline(input);
 	}
 	while (1)
 	{
-		std::cout << "Enter a command: (ADD, SEARCH, or EXIT)\n" << std::endl;
-		getline(std::cin, input);
+		std::cout << "Enter a command: (ADD, SEARCH, or EXIT)\n"
+				  << std::endl;
+		ft_getline(input);
 		if (input == "ADD")
-			phonebook->add();
+			phonebook.add();
 		else if (input == "SEARCH")
-			phonebook->search();
+			phonebook.search();
 		else if (input == "EXIT")
 			break;
 	}
-	delete phonebook;
 	return 0;
 }

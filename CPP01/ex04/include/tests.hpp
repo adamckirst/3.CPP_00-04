@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   tests.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 11:18:55 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/25 20:54:22 by achien-k         ###   ########.fr       */
+/*   Created: 2024/08/25 16:53:45 by achien-k          #+#    #+#             */
+/*   Updated: 2024/08/25 17:21:28 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cctype>
+#pragma once
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <cassert>
+#include <cstdlib>
 
-static void str_to_upper(std::string &str)
-{
-	for (size_t i = 0; i < str.length(); i++)
-		str[i] = toupper(str[i]);
-}
-
-int main(int argc, char **argv)
-{
-	std::string s1;
-
-	if (argc < 2)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
-	else
-	{
-		while (*++argv)
-			s1 = s1 + *argv;
-		str_to_upper(s1);
-		std::cout << s1 << std::endl;
-	}
-	return (0);
-}
+void testBasic(void);
+void testEqual(void);
+void testEmptyS1(void);
+void testEmptyFile(void);
+void testNoS1(void);
+void testNonExistentFile(void);

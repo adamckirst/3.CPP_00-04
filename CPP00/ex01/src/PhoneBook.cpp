@@ -6,88 +6,63 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:06:47 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/22 16:08:56 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/08/25 22:23:58 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/PhoneBook.hpp"
+#include "../include/helpers.hpp"
 
 // Canonical form
-PhoneBook::PhoneBook() {}
+PhoneBook::PhoneBook() : oldest_(0) {}
 
 PhoneBook::PhoneBook(const PhoneBook &other)
 {
   for (int i = 0; i < 8; ++i)
-  {
     contact_[i] = other.contact_[i];
-  }
   password_ = other.password_;
 }
 
 PhoneBook &PhoneBook::operator=(const PhoneBook &other)
 {
-  if (this != &other)
-  {
-    for (int i = 0; i < 8; ++i)
-    {
-      contact_[i] = other.contact_[i];
-    }
-    password_ = other.password_;
-  }
+  if (this == &other)
+    return *this;
+  for (int i = 0; i < 8; ++i)
+    contact_[i] = other.contact_[i];
+  password_ = other.password_;
   return *this;
 }
 
 PhoneBook::~PhoneBook() {}
 
 // Methods
-static void prompt_data(std::string *data, std::string prompt)
+static void prompt_data(std::string &data, std::string prompt)
 {
   std::cout << "Enter " << prompt << ": ";
-  getline(std::cin, *data);
-  while (*data == "")
+  ft_getline(data);
+  while (data == "")
   {
-    std::cerr << "\033[1m\033[31mError: \033[0m" << prompt
+    std::cerr << BOLD_TEXT << RED_TEXT << "Error: " << RESET_COLOR << prompt
               << " cannot be empty. Please try again." << std::endl;
-    getline(std::cin, *data);
+    ft_getline(data);
   }
 }
 
-Contact *PhoneBook::newContact()
+Contact PhoneBook::newContact()
 {
   std::string name, last, nick, phone, secret;
 
-  prompt_data(&name, "first name");
-  prompt_data(&last, "last name");
-  prompt_data(&nick, "nickname");
-  prompt_data(&phone, "phone number");
-  prompt_data(&secret, "darkest secret");
+  prompt_data(name, "first name");
+  prompt_data(last, "last name");
+  prompt_data(nick, "nickname");
+  prompt_data(phone, "phone number");
+  prompt_data(secret, "darkest secret");
 
-  Contact *contact = new Contact(name, last, nick, phone);
-  contact->setSecret(secret, this->password_);
+  Contact contact = Contact(name, last, nick, phone);
+  contact.setSecret(secret, this->password_);
   std::cout << "Contact added" << std::endl;
   return contact;
 }
-
-void PhoneBook::fullPhonebook(int *oldest)
-{
-  std::string input;
-  std::string name = this->contact_[*oldest].getFirstName();
-
-  std::cout << "Phonebook is full.\nThe oldest contact is index " << *oldest
-            << ": " << name << ".\nTo replace the oldest contact, type 'yes' or 'no'"
-            << std::endl;
-  getline(std::cin, input);
-  if (input == "yes")
-  {
-    this->contact_[*oldest] = *this->newContact();
-    if (*oldest == 7)
-      *oldest = 0;
-    else
-      (*oldest)++;
-  }
-  else
-    std::cout << "Contact not added." << std::endl;
-};
 
 void PhoneBook::secret(Contact contact) const
 {
@@ -96,7 +71,7 @@ void PhoneBook::secret(Contact contact) const
 
   if (this->password_ == "")
   {
-    std::cout << "\033[1m\033[31mDarkest Secret: \033[0m"
+    std::cout << BOLD_TEXT << RED_TEXT << "Darkest Secret: " << RESET_COLOR
               << contact.getSecret("") << std::endl;
     return;
   }
@@ -104,7 +79,7 @@ void PhoneBook::secret(Contact contact) const
             << std::endl;
   while (input != "BACK")
   {
-    getline(std::cin, input);
+    ft_getline(input);
     if (input == "BACK")
       return;
     output = contact.getSecret(input);
@@ -113,7 +88,7 @@ void PhoneBook::secret(Contact contact) const
       std::cout << output << " Try again or type BACK" << std::endl;
       continue;
     }
-    std::cout << "\033[1m\033[31mDarkest Secret: \033[0m" << output
+    std::cout << BOLD_TEXT << RED_TEXT << "Darkest Secret: " << RESET_COLOR << output
               << std::endl;
     return;
   }
@@ -121,13 +96,13 @@ void PhoneBook::secret(Contact contact) const
 
 void PhoneBook::printContact(Contact contact) const
 {
-  std::cout << "\n\033[1m\033[36mFirst Name: \033[0m" << contact.getFirstName()
+  std::cout << "\n\033[1m\033[36mFirst Name: " << RESET_COLOR << contact.getFirstName()
             << std::endl;
-  std::cout << "\033[1m\033[36mLast Name: \033[0m" << contact.getLastName()
+  std::cout << BOLD_TEXT << "\033[36mLast Name: " << RESET_COLOR << contact.getLastName()
             << std::endl;
-  std::cout << "\033[1m\033[36mNickname: \033[0m" << contact.getNickname()
+  std::cout << BOLD_TEXT << "\033[36mNickname: " << RESET_COLOR << contact.getNickname()
             << std::endl;
-  std::cout << "\033[1m\033[36mPhone Number: \033[0m"
+  std::cout << BOLD_TEXT << "\033[36mPhone Number: " << RESET_COLOR
             << contact.getPhoneNumber() << std::endl;
   this->secret(contact);
   std::cout << std::endl;
@@ -141,6 +116,13 @@ void PhoneBook::printHeader() const
   std::cout << std::setw(10) << "Nickname" << std::endl;
 }
 
+static std::string formatName(std::string name)
+{
+  if (name.length() > 10)
+    return name.substr(0, 9) + ".";
+  return name;
+}
+
 void PhoneBook::printList() const
 {
   this->printHeader();
@@ -149,19 +131,9 @@ void PhoneBook::printList() const
     if (!contact_[i].getFirstName().empty())
     {
       std::cout << std::setw(10) << i << "|";
-      if (contact_[i].getFirstName().length() > 10)
-        std::cout.write(contact_[i].getFirstName().c_str(), 9) << "." << "|";
-      else
-        std::cout << std::setw(10) << contact_[i].getFirstName() << "|";
-      if (contact_[i].getLastName().length() > 10)
-        std::cout.write(contact_[i].getLastName().c_str(), 9) << "." << "|";
-      else
-        std::cout << std::setw(10) << contact_[i].getLastName() << "|";
-      if (contact_[i].getNickname().length() > 10)
-        std::cout.write(contact_[i].getNickname().c_str(), 9) << ".";
-      else
-        std::cout << std::setw(10) << contact_[i].getNickname();
-      std::cout << std::endl;
+      std::cout << std::setw(10) << formatName(contact_[i].getFirstName()) << "|";
+      std::cout << std::setw(10) << formatName(contact_[i].getLastName()) << "|";
+      std::cout << std::setw(10) << formatName(contact_[i].getNickname()) << std::endl;
     }
   }
 }
@@ -179,21 +151,7 @@ bool PhoneBook::setPassword(std::string pw)
 
 void PhoneBook::add()
 {
-  static int oldest = 0;
-
-  for (int i = 0; i < 8; i++)
-  {
-    while (!this->contact_[i].getFirstName().empty())
-    {
-      if (i++ == 7)
-      {
-        this->fullPhonebook(&oldest);
-        return;
-      }
-    }
-    this->contact_[i] = *this->newContact();
-    return;
-  }
+  this->contact_[this->oldest_++ % 8] = this->newContact();
 }
 
 void PhoneBook::search() const
@@ -208,13 +166,13 @@ void PhoneBook::search() const
   }
   this->printList();
   std::cout << "Enter the index of the contact you want to see" << std::endl;
-  getline(std::cin, input);
+  ft_getline(input);
   if (input.length() == 1 && input[0] >= '0' && input[0] <= '7' &&
       !contact_[input[0] - '0'].getFirstName().empty())
     this->printContact(contact_[input[0] - '0']);
   else
   {
-    std::cout << "\033[1m\033[31mInvalid input. Try again.\033[0m" << std::endl
+    std::cout << BOLD_TEXT << RED_TEXT << "Invalid input. Try again." << RESET_COLOR << std::endl
               << std::endl;
     this->search();
   }

@@ -6,7 +6,7 @@
 #    By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/28 12:00:40 by achien-k          #+#    #+#              #
-#    Updated: 2024/08/25 00:27:07 by achien-k         ###   ########.fr        #
+#    Updated: 2024/08/25 17:48:40 by achien-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC_DIR		=	src
 TEST_DIR	=	tests
 
 SRCS		=	main 
-TEST_SRCS   =   test_main
+TEST_SRCS   =   test_main test_basic test_empty_file test_empty_s1 test_equal test_non_existent_file test_nos1
 
 OBJ_DIR		=	bin
 OBJ			=	$(foreach src, $(SRCS), $(OBJ_DIR)/$(src).o)
