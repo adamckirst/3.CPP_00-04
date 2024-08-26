@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/25 21:50:17 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/25 21:51:58y achien-k         ###   ########.fr       */
+/*   Created: 2024/08/26 13:03:48 by achien-k          #+#    #+#             */
+/*   Updated: 2024/08/26 17:01:02 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include <signal.h>
+#include <fstream>
+#include <sstream>
+#include <stdexcept>
 
 #define BOLD_TEXT "\033[1m"
 
@@ -37,6 +39,4 @@
 #define CYAN_BG "\033[46m"
 #define WHITE_BG "\033[47m"
 
-#define SIGINT 2
-
-void ft_getline(std::string &input);
+int error_return(std::string msg);

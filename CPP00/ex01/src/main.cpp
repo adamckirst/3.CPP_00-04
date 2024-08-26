@@ -1,9 +1,17 @@
 #include "../include/PhoneBook.hpp"
 #include "../include/helpers.hpp"
 
+void sig_handler(int signum)
+{
+	if (signum == SIGINT)
+		exit(signum);
+}
+
 void ft_getline(std::string &input)
 {
+	signal(SIGINT, sig_handler);
 	getline(std::cin, input);
+
 	if (std::cin.eof())
 	{
 		std::cerr << std::endl
@@ -14,7 +22,7 @@ void ft_getline(std::string &input)
 
 int main(void)
 {
-	PhoneBook phonebook = PhoneBook();
+	PhoneBook phonebook;
 	std::string input;
 
 	std::cout << "Welcome to your new PhoneBook.\nTo start, set up a password for secrets or leave empty: ";
