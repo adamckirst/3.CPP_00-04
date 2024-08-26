@@ -1,23 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/26 18:20:36 by achien-k          #+#    #+#             */
+/*   Updated: 2024/08/26 18:20:37 by achien-k         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Zombie.hpp"
 
-Zombie* zombieHorde(int N, std::string name) {
+Zombie *zombieHorde(int N, std::string name)
+{
 	Zombie *zombies = new Zombie[N];
 
-	for (int i = 0; i < N; i++) {
+	for (int i = 0; i < N; i++)
+	{
 		zombies[i].setName(name);
 	}
 	return (zombies);
 }
-// Zombie* zombieHordeTest(int N, std::string name) {
-// 	Zombie *zombies = new Zombie[N];
-// 	std::string Number;
-// 	std::ostringstream	convert;
-
-// 	name += " ";
-// 	for (int i = 0; i < N; i++) {
-// 		Number = static_cast<std::ostringstream*>(&(convert << i))->str();
-// 		zombies[i].setName(name + Number);
-// 		convert.str("");
-// 	}
-// 	return (zombies);
-// }

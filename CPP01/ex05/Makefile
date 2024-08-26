@@ -6,7 +6,7 @@
 #    By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 17:56:04 by achien-k          #+#    #+#              #
-#    Updated: 2024/08/26 17:56:06 by achien-k         ###   ########.fr        #
+#    Updated: 2024/08/26 18:15:27 by achien-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 INC_DIR		=	include
 SRC_DIR		=	src
-SRCS		=	main Harl.cpp
+SRCS		=	main Harl
 OBJ_DIR		=	bin
 OBJ			=	$(foreach src, $(SRCS), $(OBJ_DIR)/$(src).o)
 VPATH		=	$(SRC_DIR)

@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 18:21:18 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/26 18:21:19 by achien-k         ###   ########.fr       */
+/*   Created: 2024/08/26 17:55:32 by achien-k          #+#    #+#             */
+/*   Updated: 2024/08/26 18:39:34 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#include <iostream>
-#include <string>
+#include "Harl.hpp"
 
-class Weapon
+int main(int argc, char **argv)
 {
-private:
-	std::string type_;
+	if (argc != 2)
+		return (1);
 
-public:
-	Weapon(std::string type);
-	Weapon(const Weapon &other);
-	Weapon &operator=(const Weapon &other);
-	~Weapon();
+	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
-	const std::string getType() const;
-	void setType(std::string type);
-};
+	std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+	Harl harl;
+	return (0);
+}
