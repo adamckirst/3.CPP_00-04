@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:55:38 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/26 18:39:54 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/08/27 13:18:39 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void Harl::error(void)
 			  << std::endl;
 }
 
-static int get_index(std::string level)
+static int get_level_index(std::string level)
 {
 	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
-	for (int i = 0; i < 4; i++)
+	for (size_t i = 0; i < 4; i++)
 	{
-		if (levels[i] == level)
+		if (!level.compare(levels[i]))
 			return i;
 	}
 	return -1;
@@ -59,21 +59,51 @@ static int get_index(std::string level)
 
 void Harl::complain(std::string level)
 {
-	switch (get_index(level))
+	void (Harl::*functions[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+
+	switch (get_level_index(level))
 	{
 	case 0:
-		(this->*debug)();
+	{
+		for (size_t i = 0; i < 4; i++)
+		{
+			(this->*functions[i])();
+			std::cout << std::endl;
+		}
 		break;
+	}
 	case 1:
-		(this->*info)();
+	{
+		for (size_t i = 1; i < 4; i++)
+		{
+			(this->*functions[i])();
+			std::cout << std::endl;
+		}
 		break;
+	}
 	case 2:
-		(this->*warning)();
+	{
+		for (size_t i = 2; i < 4; i++)
+		{
+			(this->*functions[i])();
+			std::cout << std::endl;
+		}
 		break;
+	}
 	case 3:
-		(this->*error)();
+		(this->*functions[3])();
+		std::cout << std::endl;
 		break;
 	default:
-		std::cout << RED_TEXT << "Invalid level." << RESET_COLOR << std::endl;
+		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 	}
 }
+// for (int i = get_level_index(level); i < 4; i++)
+// {
+// 	if (i < 0)
+// 		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+// 		return;
+// 	else
+// 		(this->*functions[i])();
+// 	std::cout << std::endl;
+// }
