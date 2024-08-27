@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:06:47 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/25 22:23:58 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:55:38 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void prompt_data(std::string &data, std::string prompt)
   ft_getline(data);
   while (data == "")
   {
-    std::cerr << BOLD_TEXT << RED_TEXT << "Error: " << RESET_COLOR << prompt
+    std::cerr << BOLD_TEXT << RED_TEXT << "Error: " << RESET_FORMAT << prompt
               << " cannot be empty. Please try again." << std::endl;
     ft_getline(data);
   }
@@ -71,7 +71,7 @@ void PhoneBook::secret(Contact contact) const
 
   if (this->password_ == "")
   {
-    std::cout << BOLD_TEXT << RED_TEXT << "Darkest Secret: " << RESET_COLOR
+    std::cout << BOLD_TEXT << RED_TEXT << "Darkest Secret: " << RESET_FORMAT
               << contact.getSecret("") << std::endl;
     return;
   }
@@ -88,7 +88,7 @@ void PhoneBook::secret(Contact contact) const
       std::cout << output << " Try again or type BACK" << std::endl;
       continue;
     }
-    std::cout << BOLD_TEXT << RED_TEXT << "Darkest Secret: " << RESET_COLOR << output
+    std::cout << BOLD_TEXT << RED_TEXT << "Darkest Secret: " << RESET_FORMAT << output
               << std::endl;
     return;
   }
@@ -96,13 +96,13 @@ void PhoneBook::secret(Contact contact) const
 
 void PhoneBook::printContact(Contact contact) const
 {
-  std::cout << "\n\033[1m\033[36mFirst Name: " << RESET_COLOR << contact.getFirstName()
+  std::cout << "\n\033[1m\033[36mFirst Name: " << RESET_FORMAT << contact.getFirstName()
             << std::endl;
-  std::cout << BOLD_TEXT << "\033[36mLast Name: " << RESET_COLOR << contact.getLastName()
+  std::cout << BOLD_TEXT << "\033[36mLast Name: " << RESET_FORMAT << contact.getLastName()
             << std::endl;
-  std::cout << BOLD_TEXT << "\033[36mNickname: " << RESET_COLOR << contact.getNickname()
+  std::cout << BOLD_TEXT << "\033[36mNickname: " << RESET_FORMAT << contact.getNickname()
             << std::endl;
-  std::cout << BOLD_TEXT << "\033[36mPhone Number: " << RESET_COLOR
+  std::cout << BOLD_TEXT << "\033[36mPhone Number: " << RESET_FORMAT
             << contact.getPhoneNumber() << std::endl;
   this->secret(contact);
   std::cout << std::endl;
@@ -172,7 +172,7 @@ void PhoneBook::search() const
     this->printContact(contact_[input[0] - '0']);
   else
   {
-    std::cout << BOLD_TEXT << RED_TEXT << "Invalid input. Try again." << RESET_COLOR << std::endl
+    std::cout << BOLD_TEXT << RED_TEXT << "Invalid input. Try again." << RESET_FORMAT << std::endl
               << std::endl;
     this->search();
   }

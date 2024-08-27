@@ -18,7 +18,7 @@
 
 #define BOLD_TEXT "\033[1m"
 
-#define RESET_COLOR "\033[0m"
+#define RESET_FORMAT "\033[0m"
 #define BLACK_TEXT "\033[30m"
 #define RED_TEXT "\033[31m"
 #define GREEN_TEXT "\033[32m"
