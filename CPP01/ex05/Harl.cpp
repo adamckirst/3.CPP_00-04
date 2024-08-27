@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:55:38 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/26 18:17:40 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:55:38 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ void Harl::complain(std::string level)
 		}
 	}
 
-	std::cout << RED_TEXT << "Invalid level." << RESET_COLOR << std::endl;
+	std::cout << RED_TEXT << "Invalid level." << RESET_FORMAT << std::endl;
 }

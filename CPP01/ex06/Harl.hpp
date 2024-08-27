@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:02:18 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/27 12:59:57 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:55:38 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #define BOLD_TEXT "\033[1m"
 
-#define RESET_COLOR "\033[0m"
+#define RESET_FORMAT "\033[0m"
 #define BLACK_TEXT "\033[30m"
 #define RED_TEXT "\033[31m"
 #define GREEN_TEXT "\033[32m"

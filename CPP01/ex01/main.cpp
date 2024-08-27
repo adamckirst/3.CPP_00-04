@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:20:34 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/26 18:20:35 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:45:59 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,15 @@
 static bool isPositiveInteger(const std::string &str)
 {
 	if (str.empty())
-	{
 		return false;
-	}
 
 	if (str[0] == '0' && str.length() > 1)
-	{
 		return false;
-	}
 
 	for (size_t i = 0; i < str.length(); ++i)
 	{
 		if (!isdigit(str[i]))
-		{
 			return false;
-		}
 	}
 
 	return true;

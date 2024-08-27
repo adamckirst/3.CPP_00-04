@@ -43,8 +43,8 @@ int main(int argc, char **argv)
 	std::string s1 = argv[2];
 	std::string s2 = argv[3];
 
-	if (s1.empty() || s2.empty())
-		return error_return("Please provide non-empty strings.");
+	if (s1.empty())
+		return error_return("Please provide a non-empty source string.");
 
 	std::ifstream sourceFile;
 	sourceFile.open(filename.c_str());
@@ -53,11 +53,14 @@ int main(int argc, char **argv)
 
 	std::ostringstream text;
 	text << sourceFile.rdbuf();
+	if (text.str().empty())
+		return error_return("File is empty.");
 
 	filename += ".replace";
 
 	std::ofstream replaceFile(filename.c_str());
 	replaceFile << replace_text(text.str(), s1, s2);
-	std::cout << GREEN_TEXT << BOLD_TEXT << filename << " was created/updated succesfully!" << RESET_COLOR << std::endl;
+	std::cout << GREEN_TEXT << BOLD_TEXT << filename << RESET_FORMAT << GREEN_TEXT
+			  << " was created/updated succesfully!" << RESET_FORMAT << std::endl;
 	return 0;
 }
