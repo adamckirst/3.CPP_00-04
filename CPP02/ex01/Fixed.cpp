@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:41:11 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/28 13:34:00 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:48:45 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 Fixed::Fixed() : value_(0)
 {
 	std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::Fixed(const int value)
+{
+	value_ = value * (1 << fractional_bits_);
+	std::cout << "Int constructor called" << std::endl;
+}
+
+Fixed::Fixed(const float value)
+{
+	value_ = static_cast<int>(round(value * (1 << fractional_bits_)));
+	std::cout << "Float constructor called with " << std::endl;
 }
 
 Fixed::Fixed(const Fixed &other)
@@ -41,13 +53,31 @@ Fixed::~Fixed()
 // Methods
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
-	std::bitset<sizeof(int)> bits(this->value_);
-	return bits.to_ulong();
+	return value_;
 }
 
 void Fixed::setRawBits(int const raw)
 {
-	std::cout << "setRawBits member function called" << std::endl;
 	this->value_ = raw;
+}
+
+float Fixed::toFloat(void) const
+{
+	return (static_cast<float>(value_) / (1 << fractional_bits_));
+}
+
+int Fixed::toInt(void) const
+{
+	return (value_ / (1 << fractional_bits_));
+}
+
+std::ostream &Fixed::write(std::ostream &dest) const
+{
+	dest << this->toFloat();
+	return dest;
+}
+
+std::ostream &operator<<(std::ostream &out, const Fixed &as_float)
+{
+	return as_float.write(out);
 }
