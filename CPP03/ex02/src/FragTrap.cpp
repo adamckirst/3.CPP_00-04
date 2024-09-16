@@ -6,19 +6,25 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:38:59 by achien-k          #+#    #+#             */
-/*   Updated: 2024/09/13 13:45:54 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:47:49 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/FragTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap("unknown", 100, 100, 30)
+FragTrap::FragTrap() : ClapTrap("unknown")
 {
+	hit_points_ = 100;
+	energy_points_ = 100;
+	attack_dmg_ = 30;
 	std::cout << GREEN_TEXT << "FragTrap default constructor called" << RESET_FORMAT << std::endl;
 }
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name, 100, 100, 30)
+FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
+	hit_points_ = 100;
+	energy_points_ = 100;
+	attack_dmg_ = 30;
 	std::cout << GREEN_TEXT << "FragTrap " << name << " was constructed!" << RESET_FORMAT << std::endl;
 }
 
@@ -29,7 +35,6 @@ FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
 
 FragTrap &FragTrap::operator=(const FragTrap &other)
 {
-	// Assignment operator
 	if (this != &other)
 	{
 		ClapTrap::operator=(other);

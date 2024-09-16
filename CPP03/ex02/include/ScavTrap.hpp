@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:54:34 by achien-k          #+#    #+#             */
-/*   Updated: 2024/09/13 13:01:43 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:48:58 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ public:
 	ScavTrap &operator=(const ScavTrap &other);
 	~ScavTrap();
 
+	void attack(const std::string &target);
 	void guardGate();
 };
