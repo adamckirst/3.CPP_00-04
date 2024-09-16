@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:57:42 by achien-k          #+#    #+#             */
-/*   Updated: 2024/09/16 18:59:37 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/09/16 20:58:35 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 {
 	if (this == &other)
 		return *this;
+	std::cout << GREEN_TEXT << "ClapTrap " << other.name_ << " was assigned to " << name_ << RESET_FORMAT << std::endl;
 	name_ = other.name_;
 	hit_points_ = other.hit_points_;
 	energy_points_ = other.energy_points_;
 	attack_dmg_ = other.attack_dmg_;
-	std::cout << GREEN_TEXT << "ClapTrap " << name_ << " was assigned to " << other.name_ << RESET_FORMAT << std::endl;
 	return *this;
 }
 

@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 11:57:43 by achien-k          #+#    #+#             */
-/*   Updated: 2024/09/13 13:34:18 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/09/16 20:57:43 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(void)
 	jon_snow.takeDamage(white_walker.getAttackDmg());
 	std::cout << std::endl
 			  << BOLD_TEXT << CYAN_TEXT << "Jon Snow used a potion to recover energy!" << RESET_FORMAT << std::endl;
-	jon_snow.gainEnergy(5);
+	jon_snow.gainEnergy(10);
 
 	std::cout << std::endl
 			  << BOLD_TEXT << CYAN_TEXT << "Ghost joined the fight!" << RESET_FORMAT << std::endl;

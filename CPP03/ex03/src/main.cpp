@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ScavTrap.hpp"
+#include "../include/DiamondTrap.hpp"
 
 int main(void)
 {
@@ -58,12 +58,40 @@ int main(void)
 	ScavTrap scav_walker("Scav Walker");
 	scav_walker.guardGate();
 
-	scav_walker.attack(jon_snow.getName());
-	jon_snow.takeDamage(scav_walker.getAttackDmg());
-
 	scav_walker.attack(wolf.getName());
 	wolf.takeDamage(scav_walker.getAttackDmg());
 
+	std::cout << std::endl
+			  << BOLD_TEXT << CYAN_TEXT << "Brienne joins the fight!" << RESET_FORMAT << std::endl;
+	FragTrap brienne("Brienne");
+	brienne.attack(scav_walker.getName());
+	scav_walker.takeDamage(brienne.getAttackDmg());
+	jon_snow.attack(scav_walker.getName());
+	scav_walker.takeDamage(jon_snow.getAttackDmg());
+	scav_walker.attack(brienne.getName());
+	brienne.takeDamage(scav_walker.getAttackDmg());
+	brienne.attack(scav_walker.getName());
+	scav_walker.takeDamage(brienne.getAttackDmg());
+	jon_snow.attack(scav_walker.getName());
+	scav_walker.takeDamage(jon_snow.getAttackDmg());
+	brienne.highFivesGuys();
+
+	std::cout << std::endl
+			  << BOLD_TEXT << CYAN_TEXT << "Diamond Walker joins the battle!" << RESET_FORMAT << std::endl;
+	DiamondTrap diamond_walker("Diamond Walker");
+	diamond_walker.whoAmI();
+	diamond_walker.attack(brienne.getName());
+	brienne.takeDamage(diamond_walker.getAttackDmg());
+	jon_snow.attack(diamond_walker.getName());
+	diamond_walker.takeDamage(jon_snow.getAttackDmg());
+	brienne.attack(diamond_walker.getName());
+	diamond_walker.takeDamage(brienne.getAttackDmg());
+	diamond_walker.attack(brienne.getName());
+	brienne.takeDamage(diamond_walker.getAttackDmg());
+	jon_snow.attack(diamond_walker.getName());
+	diamond_walker.takeDamage(jon_snow.getAttackDmg());
+	brienne.attack(diamond_walker.getName());
+	diamond_walker.takeDamage(brienne.getAttackDmg());
 	std::cout << std::endl
 			  << BOLD_TEXT << CYAN_TEXT << "The battle is over!" << RESET_FORMAT << std::endl;
 	return 0;
