@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 13:28:53 by achien-k          #+#    #+#             */
-/*   Updated: 2024/09/18 14:38:49 by achien-k         ###   ########.fr       */
+/*   Created: 2024/09/18 17:23:06 by achien-k          #+#    #+#             */
+/*   Updated: 2024/09/18 17:26:01 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include "A_Animal.hpp"
-#include "Brain.hpp"
+#include "utils.hpp"
+#include "AMateria.hpp"
 
-class Cat : public A_Animal
+class Character
 {
 private:
-	Brain *brain_;
+	std::string name_;
+	AMateria *materias_[4];
 
 public:
-	Cat();
-	Cat(const Cat &other);
-	Cat &operator=(const Cat &other);
-	virtual ~Cat();
+	Character();
+	Character(const Character &other);
+	Character &operator=(const Character &other);
+	~Character();
 
-	virtual void makeSound() const;
-	Brain *getBrain() const;
+	std::string const &getName();
+	void equip(AMateria *m);
+	void unequip(int idx);
+	void use(int idx, ICharacter &target);
 };

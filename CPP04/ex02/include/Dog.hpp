@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 13:28:53 by achien-k          #+#    #+#             */
-/*   Updated: 2024/09/18 12:52:01 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:38:43 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ public:
 	Dog();
 	Dog(const Dog &other);
 	Dog &operator=(const Dog &other);
-	~Dog();
+	virtual ~Dog();
 
-	void makeSound() const;
+	virtual void makeSound() const;
 	Brain *getBrain() const;
 };
