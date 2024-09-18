@@ -5,6 +5,10 @@
     "ostream": "cpp",
     "fstream": "cpp",
     "cstdlib": "cpp",
-    "sstream": "cpp"
+    "sstream": "cpp",
+    "iomanip": "cpp",
+    "string": "cpp",
+    "wrongcat.hpp": "c",
+    "new": "cpp"
   }
 }

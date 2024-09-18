@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:41:11 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/28 17:50:08 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:04:54 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Fixed::Fixed(const int value)
 Fixed::Fixed(const float value)
 {
 	value_ = static_cast<int>(roundf(value * (1 << fractional_bits_)));
-	std::cout << "Float constructor called with " << std::endl;
+	std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &other)

@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:41:11 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/28 13:34:00 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:52:57 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ Fixed::~Fixed()
 int Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
-	std::bitset<sizeof(int)> bits(this->value_);
-	return bits.to_ulong();
+	return value_;
 }
 
 void Fixed::setRawBits(int const raw)

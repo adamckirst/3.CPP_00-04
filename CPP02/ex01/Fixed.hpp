@@ -6,14 +6,13 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 18:45:25 by achien-k          #+#    #+#             */
-/*   Updated: 2024/08/28 17:46:18 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:53:53 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
 #include <string>
-#include <bitset>
 #include <iomanip>
 #include <math.h>
 

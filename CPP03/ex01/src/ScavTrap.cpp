@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:56:28 by achien-k          #+#    #+#             */
-/*   Updated: 2024/09/16 18:53:00 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:51:07 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
 {
-	std::cout << GREEN_TEXT << "ScavTrap constructed by copying " << other.getName() << RESET_FORMAT << std::endl;
+	std::cout << GREEN_TEXT << "ScavTrap constructed by copying " << other.name_ << RESET_FORMAT << std::endl;
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &other)

@@ -6,7 +6,7 @@
 /*   By: achien-k <achien-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:37:32 by achien-k          #+#    #+#             */
-/*   Updated: 2024/09/10 17:17:51 by achien-k         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:42:52 by achien-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,12 @@ int main(void)
 
 	std::cout << RED_TEXT << BOLD_TEXT << "Min and Max" << RESET_FORMAT << std::endl;
 	std::cout << "max(a, b): " << Fixed::max(a, b) << std::endl;
-	std::cout << "min(a, b): " << Fixed::min(a, b) << std::endl
+	std::cout << "min(a, b): " << Fixed::min(a, b) << std::endl;
+
+	const Fixed c = a;
+	const Fixed d = b;
+	std::cout << "const max(c, d): " << Fixed::max(c, d) << std::endl;
+	std::cout << "const min(c, d): " << Fixed::min(c, d) << std::endl
 			  << std::endl;
 
 	return 0;
